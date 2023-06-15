@@ -6,6 +6,7 @@ import {
   invalidEmailOrPassword,
   invalidPasswordLength,
   missingBody,
+  somethingInUse,
   usernameInUse,
 } from "../utils/responseUtils.js";
 
@@ -66,13 +67,7 @@ export async function userRegister(req, res) {
         case "email":
           return emailInUse(res);
         default: // Handle unexpected key pattern
-          return res.status(500).json({
-            error: {
-              code: "SOMETHING_DUPLICATED",
-              message: "Something is already in use",
-              error: error,
-            },
-          });
+          return somethingInUse(res, error);
       }
     }
     console.log(

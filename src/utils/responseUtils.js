@@ -56,6 +56,8 @@ export function invalidEmailOrPassword(res) {
     },
   });
 }
+
+// 🟢 -- NOT FOUND -- 🟢 //
 export function userIdNotFound(res) {
   return res.status(404).json({
     error: {
@@ -72,8 +74,41 @@ export function userEmailNotFound(res) {
     },
   });
 }
+export function profileIdNotFound(res) {
+  return res.status(404).json({
+    error: {
+      code: "PROFILE_ID_NOT_FOUND",
+      message: "Profile ID does not exist",
+    },
+  });
+}
+export function profileUserIdNotFound(res) {
+  return res.status(404).json({
+    error: {
+      code: "PROFILE_USERID_NOT_FOUND",
+      message: "Profile with this UserID does not exist",
+    },
+  });
+}
 
 // 🟢 -- CONFLICT -- 🟢 //
+export function userAlreadyHasProfile(res) {
+  return res.status(409).json({
+    error: {
+      code: "USER_ALREADY_HAS_PROFILE",
+      message: "This UserId already has an existing Profile",
+    },
+  });
+}
+export function somethingInUse(res, error) {
+  return res.status(409).json({
+    error: {
+      code: "SOMETHING_DUPLICATED",
+      message: "Something is already in use",
+      error: error,
+    },
+  });
+}
 export function usernameInUse(res) {
   return res.status(409).json({
     error: {

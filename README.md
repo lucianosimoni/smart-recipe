@@ -19,7 +19,7 @@ target="_blank">
 
 - Recipe Database
 - Recipe Recommendations
-- Search and Filtering 🔍
+- Search and Filtering ⚠️
 - User Registration and Authentication 🔑
 - User Profile & Favorite Recipes 🧑
 - Mobile Friendly 📱
