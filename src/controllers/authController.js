@@ -3,12 +3,14 @@ import jwt from "jsonwebtoken";
 import { createUser, getUserByEmail } from "../models/userModel.js";
 import {
   emailInUse,
+  invalidEmailFormat,
   invalidEmailOrPassword,
   invalidPasswordLength,
   missingBody,
   somethingInUse,
   usernameInUse,
 } from "../utils/responseUtils.js";
+import { validEmail } from "../utils/validationUtils.js";
 
 export async function userLogin(req, res) {
   const { email, password } = req.body;
@@ -45,6 +47,9 @@ export async function userRegister(req, res) {
   if (password.length < 6) {
     return invalidPasswordLength(res);
   }
+
+  // Validates email 📧
+  if (!validEmail(email)) return invalidEmailFormat(res);
 
   const hashedPassword = await bcrypt.hash(password, 15);
   const user = { username, email, hashedPassword };

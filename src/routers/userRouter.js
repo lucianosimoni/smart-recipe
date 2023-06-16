@@ -1,10 +1,14 @@
 import express from "express";
-import { userGet, userDelete } from "../controllers/userController.js";
+import {
+  userGet,
+  userUpdate,
+  userDelete,
+} from "../controllers/userController.js";
 
 const router = express.Router();
 
 router.get("/", userGet);
+router.put("/:userId", userUpdate);
 router.delete("/:userId", userDelete);
-// TODO: Add the Update Endpoint
 
 export default router;

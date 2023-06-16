@@ -6,11 +6,15 @@ import {
   updateUser,
 } from "../models/userModel.js";
 import {
+  invalidEmailFormat,
   missingBody,
   missingParams,
   userEmailNotFound,
   userIdNotFound,
 } from "../utils/responseUtils.js";
+import { validEmail } from "../utils/validationUtils.js";
+
+// 🟢 User Creation is in the authController.js
 
 export async function userGet(req, res) {
   const { userId, userEmail } = req.query;
@@ -71,6 +75,11 @@ export async function userUpdate(req, res) {
   }
   if (!user) {
     return missingBody(res);
+  }
+
+  // Validates Email if there is one 📧
+  if (user.hasOwnProperty("email")) {
+    if (!validEmail(user.email)) return invalidEmailFormat(res);
   }
 
   try {

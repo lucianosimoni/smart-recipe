@@ -56,6 +56,14 @@ export function invalidEmailOrPassword(res) {
     },
   });
 }
+export function invalidEmailFormat(res) {
+  return res.status(401).json({
+    error: {
+      code: "INVALID_EMAIL_FORMAT",
+      message: "Email is formatted in an invalid way",
+    },
+  });
+}
 
 // 🟢 -- NOT FOUND -- 🟢 //
 export function userIdNotFound(res) {
