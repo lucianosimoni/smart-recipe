@@ -3,10 +3,13 @@ import jwt from "jsonwebtoken";
 import { createUser, getUserByEmail } from "../models/userModel.js";
 import {
   emailInUse,
+  invalidAuth,
   invalidEmailFormat,
   invalidEmailOrPassword,
   invalidPasswordLength,
+  missingAuth,
   missingBody,
+  missingToken,
   somethingInUse,
   usernameInUse,
 } from "../utils/responseUtils.js";
@@ -79,5 +82,24 @@ export async function userRegister(req, res) {
       "🔴 An unexpected Error happened while Registering the User (authController.js / userRegister)"
     );
     res.status(500).json(error);
+  }
+}
+
+export function jwtCheck(req, res) {
+  const authHeader = req.headers.authorization;
+  if (!authHeader) {
+    return missingAuth(res);
+  }
+
+  const token = authHeader.split(" ")[1];
+  if (!token) {
+    return missingToken(res);
+  }
+
+  try {
+    jwt.verify(token, process.env.JWT_PRIVATE_KEY);
+    return res.status(200).json({ ok: true });
+  } catch (error) {
+    return invalidAuth(res);
   }
 }
