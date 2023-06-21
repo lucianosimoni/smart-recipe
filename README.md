@@ -25,9 +25,7 @@ target="_blank">
 - Mobile Friendly 📱
 - AI LLM 🧠
 
----
-
----
+![ChefcatCatChefGIF](https://github.com/lucianosimoni/smart-recipe-server/assets/71110718/b8f8f1a5-04f1-49a8-86e6-0922c64253bf)
 
 ## ⚙️ Technologies Used
 
