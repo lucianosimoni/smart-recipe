@@ -1,13 +1,16 @@
 import express from "express";
 import morgan from "morgan";
 import cors from "cors";
+import dotenv from "dotenv";
 import authRouter from "./routers/authRouter.js";
 import userRouter from "./routers/userRouter.js";
 import profileRouter from "./routers/profileRouter.js";
 import authenticate from "./middleware/authenticate.js";
 import serverAddress from "./utils/addressUtils.js";
 
-const whitelist = ["http://smart-recipe-client.vercel.app/"];
+dotenv.config();
+
+const whitelist = process.env.WHITELIST.split(",");
 const corsOptions = {
   origin: (origin, callback) => {
     if (whitelist.indexOf(origin) !== -1) callback(null, true);
